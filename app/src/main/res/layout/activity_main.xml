@@ -1,48 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:id="@+id/activity_main"
-    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
     android:paddingBottom="16dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="16dp"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/timer"
-        android:textSize="60sp"
+       <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0.0"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="70dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_below="@id/timer"
-        android:gravity="center">
+        android:id="@+id/imageView" />
 
         <Button
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="進む"
-            android:id="@+id/start_button"/>
+            android:id="@+id/start_button1"/>
 
         <Button
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="戻る"
-            android:id="@+id/pause_button"/>
+            android:layout_toLeftOf="@+id/start_button1"
+            android:id="@+id/pause_button2"/>
 
         <Button
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="再生停止"
-            android:id="@+id/reset_button"/>
-    </LinearLayout>
+            android:layout_toRightOf="@+id/start_button1"
+            android:id="@+id/reset_button3"/>
 </RelativeLayout>
