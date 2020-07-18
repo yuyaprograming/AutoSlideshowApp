@@ -6,11 +6,14 @@ import android.os.Bundle
 import android.content.pm.PackageManager
 import android.os.Build
 import android.util.Log
+import android.database.Cursor
 import android.provider.MediaStore
 import android.content.ContentUris
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    private var mCursor: Cursor? = null
 
     private val PERMISSIONS_REQUEST_CODE = 100
 
@@ -54,14 +57,20 @@ class MainActivity : AppCompatActivity() {
             null // ソート (null ソートなし)
         )
 
-        if (cursor!!.moveToFirst()) {
-            // indexからIDを取得し、そのIDから画像のURIを取得する
-            val fieldIndex = cursor.getColumnIndex(MediaStore.Images.Media._ID)
-            val id = cursor.getLong(fieldIndex)
-            val imageUri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
+        button1.setOnClickListener {
 
-            imageView.setImageURI(imageUri)
+
+            if (cursor!!.moveToFirst()) {
+                // indexからIDを取得し、そのIDから画像のURIを取得する
+                val fieldIndex = cursor.getColumnIndex(MediaStore.Images.Media._ID)
+                val id = cursor.getLong(fieldIndex)
+                val imageUri =
+                    ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
+
+                imageView.setImageURI(imageUri)
+            }
+            cursor.close()
         }
-        cursor.close()
     }
+
 }
