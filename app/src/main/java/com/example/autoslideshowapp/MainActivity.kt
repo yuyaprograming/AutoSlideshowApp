@@ -86,6 +86,38 @@ class MainActivity : AppCompatActivity() {
                 mCursor!!.moveToFirst()
             }
         }
+
+        button2.setOnClickListener {
+
+
+            if (mCursor!!.moveToPrevious()) {
+                // indexからIDを取得し、そのIDから画像のURIを取得する
+                val fieldIndex = mCursor!!.getColumnIndex(MediaStore.Images.Media._ID)
+                val id = mCursor!!.getLong(fieldIndex)
+                val imageUri =
+                    ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
+
+                imageView.setImageURI(imageUri)
+            } else {
+                mCursor!!.moveToLast()
+            }
+        }
+
+        button3.setOnClickListener {
+
+
+            if (mCursor!!.moveToPrevious()) {
+                // indexからIDを取得し、そのIDから画像のURIを取得する
+                val fieldIndex = mCursor!!.getColumnIndex(MediaStore.Images.Media._ID)
+                val id = mCursor!!.getLong(fieldIndex)
+                val imageUri =
+                    ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
+
+                imageView.setImageURI(imageUri)
+            } else {
+                mCursor!!.moveToLast()
+            }
+        }
     }
 }
 
