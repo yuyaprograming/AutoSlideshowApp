@@ -110,7 +110,7 @@ class MainActivity : AppCompatActivity() {
                             imageView.setImageURI(imageUri)
                         }
                     }
-                }, 20, 20) // 最初に始動させるまで 20ミリ秒、ループの間隔を 20ミリ秒 に設定
+                }, 2000, 2000) // 最初に始動させるまで 2000ミリ秒、ループの間隔を 2000ミリ秒 に設定
             }
             else{
                 mTimer!!.cancel()
