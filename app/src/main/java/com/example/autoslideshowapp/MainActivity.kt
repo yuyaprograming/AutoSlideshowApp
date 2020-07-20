@@ -7,15 +7,24 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.util.Log
 import android.database.Cursor
+import android.os.Handler
 import android.provider.MediaStore
 import android.content.ContentUris
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     private var mCursor: Cursor? = null
 
     private val PERMISSIONS_REQUEST_CODE = 100
+
+    private var mTimer: Timer? = null
+
+    // タイマー用の時間のための変数
+    private var mTimerSec = 0.0
+
+    private var mHandler = Handler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,17 +98,28 @@ class MainActivity : AppCompatActivity() {
 
         button2.setOnClickListener {
 
+            if (mTimer == null){
+                mTimer = Timer()
+                mTimer!!.schedule(object : TimerTask() {
+                    override fun run() {
+                        mHandler.post {
+                            mCursor!!.moveToNext()
+                            val fieldIndex = mCursor!!.getColumnIndex(MediaStore.Images.Media._ID)
+                            val id = mCursor!!.getLong(fieldIndex)
+                            val imageUri =
+                                ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
 
-            if (mCursor!!.moveToPrevious()) {
-                // indexからIDを取得し、そのIDから画像のURIを取得する
-                val fieldIndex = mCursor!!.getColumnIndex(MediaStore.Images.Media._ID)
-                val id = mCursor!!.getLong(fieldIndex)
-                val imageUri =
-                    ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
+                            imageView.setImageURI(imageUri)
+                        }
+                    }
+                }, 20, 20) // 最初に始動させるまで 20ミリ秒、ループの間隔を 20ミリ秒 に設定
+            }
+        }
 
-                imageView.setImageURI(imageUri)
-            } else {
-                mCursor!!.moveToLast()
+        button2.setOnClickListener {
+            if (mTimer != null){
+                mTimer!!.cancel()
+                mTimer = null
             }
         }
 
