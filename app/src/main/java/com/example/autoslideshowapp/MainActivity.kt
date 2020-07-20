@@ -97,7 +97,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         button2.setOnClickListener {
-
             if (mTimer == null){
                 mTimer = Timer()
                 mTimer!!.schedule(object : TimerTask() {
@@ -108,16 +107,12 @@ class MainActivity : AppCompatActivity() {
                             val id = mCursor!!.getLong(fieldIndex)
                             val imageUri =
                                 ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
-
                             imageView.setImageURI(imageUri)
                         }
                     }
                 }, 20, 20) // 最初に始動させるまで 20ミリ秒、ループの間隔を 20ミリ秒 に設定
             }
-        }
-
-        button2.setOnClickListener {
-            if (mTimer != null){
+            else{
                 mTimer!!.cancel()
                 mTimer = null
             }
