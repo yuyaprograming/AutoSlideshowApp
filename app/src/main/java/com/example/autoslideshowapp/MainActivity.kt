@@ -113,8 +113,8 @@ class MainActivity : AppCompatActivity() {
                 mTimer = Timer()
                 mTimer!!.schedule(object : TimerTask() {
                     override fun run() {
-                        button1.isEnabled = false
-                        button3.isEnabled = false
+                        button1.isClickable = false
+                        button3.isClickable = false
                         mHandler.post {
                             if (mCursor!!.moveToNext()) {
                                 // indexからIDを取得し、そのIDから画像のURIを取得する
@@ -148,8 +148,8 @@ class MainActivity : AppCompatActivity() {
             else{
                 mTimer!!.cancel()
                 mTimer = null
-                button1.isEnabled = true
-                button3.isEnabled = true
+                button1.isClickable = true
+                button3.isClickable = true
             }
         }
 
