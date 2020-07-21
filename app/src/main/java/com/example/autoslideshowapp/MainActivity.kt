@@ -116,22 +116,30 @@ class MainActivity : AppCompatActivity() {
                         mHandler.post {
                             if (mCursor!!.moveToNext()) {
                                 // indexからIDを取得し、そのIDから画像のURIを取得する
-                                val fieldIndex = mCursor!!.getColumnIndex(MediaStore.Images.Media._ID)
+                                val fieldIndex =
+                                    mCursor!!.getColumnIndex(MediaStore.Images.Media._ID)
                                 val id = mCursor!!.getLong(fieldIndex)
                                 val imageUri =
-                                    ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
+                                    ContentUris.withAppendedId(
+                                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                                        id
+                                    )
 
                                 imageView.setImageURI(imageUri)
                             } else {
                                 mCursor!!.moveToFirst()
-                                val fieldIndex = mCursor!!.getColumnIndex(MediaStore.Images.Media._ID)
+                                val fieldIndex =
+                                    mCursor!!.getColumnIndex(MediaStore.Images.Media._ID)
                                 val id = mCursor!!.getLong(fieldIndex)
                                 val imageUri =
-                                    ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, id)
+                                    ContentUris.withAppendedId(
+                                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                                        id
+                                    )
 
                                 imageView.setImageURI(imageUri)
                             }
-
+                        }
                     }
                 }, 2000, 2000) // 最初に始動させるまで 2000ミリ秒、ループの間隔を 2000ミリ秒 に設定
             }
