@@ -116,6 +116,7 @@ class MainActivity : AppCompatActivity() {
                         button1.isClickable = false
                         button3.isClickable = false
                         mHandler.post {
+                            button2.text = "停止"
                             if (mCursor!!.moveToNext()) {
                                 // indexからIDを取得し、そのIDから画像のURIを取得する
                                 val fieldIndex =
@@ -150,6 +151,9 @@ class MainActivity : AppCompatActivity() {
                 mTimer = null
                 button1.isClickable = true
                 button3.isClickable = true
+                mHandler.post{
+                    button2.text = "再生"
+                }
             }
         }
 
