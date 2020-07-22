@@ -36,6 +36,6 @@
             android:layout_height="wrap_content"
             android:text="戻る"
             android:layout_toRightOf="@+id/button2"
-            android:id="@+id/reset_button3"/>
+            android:id="@+id/button3"/>
 　　</LinearLayout>
 </LinearLayout>
