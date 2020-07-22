@@ -37,6 +37,9 @@ class MainActivity : AppCompatActivity() {
                 // 許可されている
                 getContentsInfo()
             } else {
+                button1.isClickable = false
+                button2.isClickable = false
+                button3.isClickable = false
                 // 許可されていないので許可ダイアログを表示する
                 requestPermissions(
                     arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
@@ -113,8 +116,8 @@ class MainActivity : AppCompatActivity() {
                 mTimer = Timer()
                 mTimer!!.schedule(object : TimerTask() {
                     override fun run() {
-                        button1.isEnabled = false
-                        button3.isEnabled = false
+                        button1.isClickable = false
+                        button3.isClickable = false
                         mHandler.post {
                             button2.text = "停止"
                             if (mCursor!!.moveToNext()) {
@@ -149,8 +152,8 @@ class MainActivity : AppCompatActivity() {
             else{
                 mTimer!!.cancel()
                 mTimer = null
-                button1.isEnabled = true
-                button3.isEnabled = true
+                button1.isClickable = true
+                button3.isClickable = true
                 mHandler.post{
                     button2.text = "再生"
                 }
